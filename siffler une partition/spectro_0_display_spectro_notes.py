@@ -32,7 +32,9 @@ gamme_temperee = {
 freq_map = {}
 
 for note, freqs in gamme_temperee.items():
-    for i in range(3,len(freqs)):
+    for i in range(len(freqs)):
+        if i == 0:
+            note_name = note + ",,"
         if i == 1:
             note_name = note + ","
         if i == 2:
@@ -43,8 +45,16 @@ for note, freqs in gamme_temperee.items():
             note_name = note + "''"
         if i == 5:
             note_name = note + "'''"
-
-        freq_map[note_name] = set(range(int(freqs[i] - 2), int(freqs[i] + 2)))     
+        if i == 6:
+            note_name = note + "''''"
+        if i == 7:
+            note_name = note + "'''''"
+        if i == 8:
+            note_name = note + "''''''"
+        if i == 9:
+            note_name = note + "'''''''"
+        
+        freq_map[note_name] = set(range(int(freqs[i] - 1), int(freqs[i] + 1)))     
 
 # print(freq_map)
 def get_note_name_from_csv(frequency, frequency_map):
@@ -61,7 +71,7 @@ plt.rcParams['font.family'] = 'Chalkboard'
 # Paramètres audio
 SAMPLE_RATE = 44100  
 CHUNK_SIZE = 1024 * 8  
-N_FFT = 1024 * 64        
+N_FFT = 1024 * 128        
 FREQ_MAX = 2000       
 
 note_sequence = [""]
