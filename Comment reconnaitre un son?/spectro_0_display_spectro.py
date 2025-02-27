@@ -9,8 +9,8 @@ plt.rcParams['font.family'] = 'Chalkboard'
 # Paramètres audio
 SAMPLE_RATE = 44100  # Fréquence d'échantillonnage
 CHUNK_SIZE = 1024*8  # Taille des blocs
-N_FFT = 1024*8         # Taille de la FFT (doit être un multiple de 2)
-FREQ_MAX = 1000      # Plage de fréquence maximale (2 kHz)
+N_FFT = 1024*128         # Taille de la FFT (doit être un multiple de 2)
+FREQ_MAX = 2000      # Plage de fréquence maximale (2 kHz)
 
 # Calcul de l'index correspondant à 2 kHz dans la FFT
 freqs = np.fft.rfftfreq(N_FFT, 1 / SAMPLE_RATE)
