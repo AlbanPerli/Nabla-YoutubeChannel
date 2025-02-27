@@ -1,0 +1,7 @@
+README.md
+setup.py
+fst/__init__.py
+pyfst.egg-info/PKG-INFO
+pyfst.egg-info/SOURCES.txt
+pyfst.egg-info/dependency_links.txt
+pyfst.egg-info/top_level.txt
