@@ -16,10 +16,10 @@ class Softmax(Layer):
 class ActivationLayer(Layer):
     
     def __init__(self, n_neurons, activation):
-        self.activations = [activation for _ in range(n_neurons)]
+        self.activations = [activation() for _ in range(n_neurons)]
         
     def forward(self, x):
-        self.outputs = [a(f=i) for a,i in zip(self.activations, x)]
+        self.outputs = [a(i) for a,i in zip(self.activations, x)]
         return self.outputs
     
     def backward(self, output_grad):
