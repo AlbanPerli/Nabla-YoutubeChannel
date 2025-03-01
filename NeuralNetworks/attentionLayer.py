@@ -64,13 +64,13 @@ class AttentionLayer(Layer):
         return [s/math.sqrt(self.embed_size) for s in scores]
         
     def apply_softmax(self, scores):
-        return Softmax()(f=scores)
+        return Softmax()(scores)
         
     def calculate_scores(self, Q, Ks):
         scorer = Perceptron(n_inputs=len(Q), weights=Q, use_bias=False)
         scores = []
         for K in Ks:
-            scores.append(scorer(f=K))
+            scores.append(scorer(K))
         return scores
     
     def backward(self, output_grad):

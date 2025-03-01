@@ -10,7 +10,8 @@ class Layer:
         raise NotImplementedError
 
     def __call__(self, *args, **kwds):
-        if "f" in kwds:
-            return self.forward(kwds["f"])
-        return self.backward(kwds["b"])
-    
+        if len(kwds) == 0:
+            return self.forward(*args)
+        if "b" in kwds:
+            return self.backward(kwds["b"])
+        

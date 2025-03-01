@@ -48,22 +48,15 @@ class Perceptron(Layer):
         self.inputs = []
         return error
         
-    def __call__(self, *args, **kwds):
-         # if arg name is f then call forward else call backward
-        if "f" in kwds:
-            # extract the value of f
-            return self.forward(kwds["f"])
-        return self.backward(kwds["b"])
-        
 if __name__ == "__main__":
-    p = Perceptron(3,learning_rate=0.1)
+    p = Perceptron(3, use_bias=True, learning_rate=0.1)
     a = Sigmoid()
     loss = MeanSquareError
     
     for i in range(1000):
         
-        yLin = p(f=[0.4, -1.0, 0.5])
-        yNLin = a(f=yLin)
+        yLin = p([0.4, -1.0, 0.5])
+        yNLin = a(yLin)
         
         error = loss([yNLin], [0.9])
         

@@ -10,8 +10,7 @@ class Activation:
         raise NotImplementedError
     
     def __call__(self, *args, **kwds):
-        # if arg name is f then call forward else call backward
-        if "f" in kwds:
-            # extract the value of f
-            return self.forward(kwds["f"])
-        return self.backward(kwds["b"])
+        if len(kwds) == 0:
+            return self.forward(*args)
+        if "b" in kwds:
+            return self.backward(kwds["b"])

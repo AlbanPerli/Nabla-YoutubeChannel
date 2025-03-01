@@ -8,7 +8,7 @@ class Dense(Layer):
         self.outputs = [0.0 for _ in range(n_neurons)]
     
     def forward(self, x):
-        self.outputs = [n(f=x) for n in self.neurons]
+        self.outputs = [n(x) for n in self.neurons]
         return self.outputs
     
     def backward(self, output_grad):

@@ -17,9 +17,9 @@ class CNN1D(Layer):
         self.chunked_input = [x[i:i+self.filter_size] for i in range(len(x)-self.filter_size+1)]
         for chunk in self.chunked_input:
             for i, f in enumerate(self.filters):
-                self.outputs[i] = f(f=chunk)
+                self.outputs[i] = f(chunk)
         
-        self.outputs = [f(f=x) for f in self.filters]
+        self.outputs = [f(x) for f in self.filters]
         return self.outputs
     
     def backward(self, output_grad):
@@ -40,7 +40,7 @@ class Parallel(Layer):
         self.struct_outputs = []
         self.flatten_outputs = []
         for layer in self.layers:
-            self.struct_outputs.append(layer(f=x))
+            self.struct_outputs.append(layer(x))
         for o in self.struct_outputs:
             if isinstance(o, list):
                 self.flatten_outputs.extend(o)
@@ -66,7 +66,7 @@ class Module(Layer):
         
     def forward(self, x):
         for layer in self.layers:
-            x = layer(f=x)
+            x = layer(x)
         return x
     
     def backward(self, output_grad):
@@ -83,7 +83,7 @@ if __name__ == "__main__":
     for i in range(100):
         #print("Epoch: ", i)
         x = [0.4, -1.0, 0.5, 0.2]
-        y = module(f=x)
+        y = module(x)
         print(y)
         errors = [0.2 - y[0], 0.7 - y[1], 0.1 - y[2]]
         out_grad = module(b=errors)
