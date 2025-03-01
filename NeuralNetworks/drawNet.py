@@ -108,15 +108,15 @@ def visualize_module(module, input_size):
 # ---- TESTS ----
 
 # Test avec un module complet
-module = Module(Dense(8, 3, learning_rate=0.1),
-                Dense(3, 8, learning_rate=0.1),
-                Parallel(Dense(8, 8, learning_rate=0.1),
+module = Module(Dense(8, 3, lr=0.1),
+                Dense(3, 8, lr=0.1),
+                Parallel(Dense(8, 8, lr=0.1),
                          Perceptron(8)))
 dot = visualize_module(module, input_size=8)
 dot.render("module_structure", view=True)  # Sauvegarde et ouvre l'image
 
 # Test avec un seul Dense()
-dot = visualize_module(Dense(4, 8, learning_rate=0.1), input_size=4)
+dot = visualize_module(Dense(4, 8, lr=0.1), input_size=4)
 dot.render("dense_structure", view=True)
 
 # Test avec un seul Perceptron()

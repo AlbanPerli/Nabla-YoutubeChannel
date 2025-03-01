@@ -3,11 +3,11 @@ from denseLayer import Dense
 from layers import Module
 
 
-module = Module(Dense(5, 32, learning_rate=0.1),
+module = Module(Dense(5, 32, lr=0.1),
                 SigmoidLayer(32),
-                Dense(32, 32, learning_rate=0.1),
+                Dense(32, 32, lr=0.1),
                 SigmoidLayer(32),
-                Dense(32, 5, learning_rate=0.1),
+                Dense(32, 5, lr=0.1),
                 SigmoidLayer(5))
 
 

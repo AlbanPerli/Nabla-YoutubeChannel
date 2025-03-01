@@ -3,8 +3,8 @@ from perceptron import Perceptron
 
 class Dense(Layer):
     
-    def __init__(self, n_inputs, n_neurons, learning_rate=0.01):
-        self.neurons = [Perceptron(n_inputs, learning_rate=learning_rate) for _ in range(n_neurons)]
+    def __init__(self, n_inputs, n_neurons, lr=0.01):
+        self.neurons = [Perceptron(n_inputs, learning_rate=lr) for _ in range(n_neurons)]
         self.outputs = [0.0 for _ in range(n_neurons)]
     
     def forward(self, x):

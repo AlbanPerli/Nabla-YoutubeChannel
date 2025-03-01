@@ -75,9 +75,9 @@ class Module(Layer):
             output_grad = layer(b=output_grad)
         return output_grad
     
-module = Module( Dense(4, 8, learning_rate=0.1),
+module = Module( Dense(4, 8, lr=0.1),
                      SigmoidLayer(8),
-                     Dense(8, 3, learning_rate=0.1),
+                     Dense(8, 3, lr=0.1),
     )
 
 loss = MSE()
