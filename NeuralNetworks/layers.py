@@ -1,4 +1,5 @@
 import math
+from lossFunctions import MSE
 from activationLayers import *
 from denseLayer import Dense
 from abstractLayer import Layer
@@ -79,12 +80,12 @@ module = Module( Dense(4, 8, learning_rate=0.1),
                      Dense(8, 3, learning_rate=0.1),
     )
 
+loss = MSE()
+
 if __name__ == "__main__":
     for i in range(100):
-        #print("Epoch: ", i)
         x = [0.4, -1.0, 0.5, 0.2]
         y = module(x)
-        print(y)
-        errors = [0.2 - y[0], 0.7 - y[1], 0.1 - y[2]]
-        out_grad = module(b=errors)
+        errors = loss(y, [0.2,0.7,0.1], grad=True)
+        out_grad = module(b=loss.grads)
         

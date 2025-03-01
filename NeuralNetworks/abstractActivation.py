@@ -1,13 +1,17 @@
-class Activation:
+from abc import ABC, abstractmethod
+
+class Activation(ABC):
     
     def __init__(self):
        self.output = None
     
+    @abstractmethod
     def forward(self, x):
-        raise NotImplementedError
+        pass
     
+    @abstractmethod
     def backward(self, x):
-        raise NotImplementedError
+        pass
     
     def __call__(self, *args, **kwds):
         if len(kwds) == 0:
