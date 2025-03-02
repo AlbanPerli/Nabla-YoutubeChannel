@@ -6,6 +6,7 @@ from .perceptron import Perceptron
 class CNN1D(Layer):
     
     def __init__(self, n_filters, filter_size, learning_rate=0.01):
+        super().__init__()
         self.filter_size = filter_size
         self.filters = [Perceptron(filter_size, learning_rate) for _ in range(n_filters)]
         self.outputs = [0.0 for _ in range(n_filters)]
@@ -26,48 +27,3 @@ class CNN1D(Layer):
         for i in range(len(self.filters[0].weights)):
             out_grad.append(sum([f.grads[i] for f in self.filters]))
         return out_grad
-
-class Parallel(Layer):
-    
-    def __init__(self, *args):
-        self.layers = args
-        self.struct_outputs = []
-        self.flatten_outputs = []
-
-    def forward(self, x):
-        self.struct_outputs = []
-        self.flatten_outputs = []
-        for layer in self.layers:
-            self.struct_outputs.append(layer(x))
-        for o in self.struct_outputs:
-            if isinstance(o, list):
-                self.flatten_outputs.extend(o)
-            else:
-                self.flatten_outputs.append(o)
-        return self.flatten_outputs
-    
-    def backward(self, output_grad):
-        if len(output_grad) != len(self.flatten_outputs):
-            raise ValueError("output_grad: {}, is not the same size as the number of outputs:{}".format(len(output_grad), len(self.flatten_outputs)))
-        struct_output_sizes = [len(o) if isinstance(o, list) else 1 for o in self.struct_outputs]
-        output_grads = []
-        for size in struct_output_sizes:
-            output_grads.append(output_grad[:size])
-            output_grad = output_grad[size:]
-        o = [layer(b=g) for layer, g in zip(self.layers, output_grad)]
-        return o
-
-class Module(Layer):
-    
-    def __init__(self, *args):
-        self.layers = args
-        
-    def forward(self, x):
-        for layer in self.layers:
-            x = layer(x)
-        return x
-    
-    def backward(self, output_grad):
-        for layer in reversed(self.layers):
-            output_grad = layer(b=output_grad)
-        return output_grad

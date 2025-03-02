@@ -29,6 +29,11 @@ class Perceptron(Layer):
         self.grads = [0.0 for _ in range(n_inputs)]
          
     def forward(self, inputs):
+        assert type(inputs) is list
+        assert type(inputs[0]) is not list
+        assert len(inputs) > 0
+        assert len(inputs) == len(self.weights)
+        
         self.inputs.append(inputs)
         if self.use_bias:
             self.output = sum([i*w for i,w in zip(inputs, self.weights)]) + self.bias

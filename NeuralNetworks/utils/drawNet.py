@@ -1,10 +1,12 @@
 from graphviz import Digraph
 
+from layers.perceptron import Perceptron
 from layers.denseLayer import Dense
-from NeuralNetworks.layers.layers import CNN1D, Module, Parallel
-from perceptron import Perceptron
+from layers.layers import CNN1D
+from structure.module import Module
+from structure.parallel import Parallel
 
-def visualize_module(module, input_size):
+def draw(module, input_size, graph_name="Structure"):
     """
     Génère un graphe de la structure du module avec les connexions entre couches et neurones.
     
@@ -97,29 +99,9 @@ def visualize_module(module, input_size):
         
         layer_id += 1
 
-    # Création des nœuds de sortie (avec taille uniforme)
     output_nodes = [f"Output{i}" for i in range(len(previous_layer))]
     for output, prev in zip(output_nodes, previous_layer):
         dot.node(output, shape="square", style="filled", fillcolor="lightcoral", **node_size)
         dot.edge(prev, output)
 
-    # Affichage du graphe
-    return dot
-
-# ---- TESTS ----
-
-# Test avec un module complet
-module = Module(Dense(8, 3, lr=0.1),
-                Dense(3, 8, lr=0.1),
-                Parallel(Dense(8, 8, lr=0.1),
-                         Perceptron(8)))
-dot = visualize_module(module, input_size=8)
-dot.render("module_structure", view=True)  # Sauvegarde et ouvre l'image
-
-# Test avec un seul Dense()
-dot = visualize_module(Dense(4, 8, lr=0.1), input_size=4)
-dot.render("dense_structure", view=True)
-
-# Test avec un seul Perceptron()
-dot = visualize_module(Perceptron(4), input_size=4)
-dot.render("perceptron_structure", view=True)
+    dot.render(graph_name, view=True)

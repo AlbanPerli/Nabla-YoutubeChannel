@@ -8,6 +8,10 @@ class Dense(Layer):
         self.outputs = [0.0 for _ in range(n_neurons)]
     
     def forward(self, x):
+        assert type(x) is list
+        assert type(x[0]) is not list
+        assert len(x) > 0
+        assert len(x) == len(self.neurons[0].weights)
         self.outputs = [n(x) for n in self.neurons]
         return self.outputs
     

@@ -34,7 +34,7 @@ scores = [
 # Softmax
 from layers.activationLayers import *
 
-attention_weights = Softmax()(scores)
+attention_weights = SoftmaxLayer()(scores)
 
 # Calcul du vecteur pondéré (somme pondérée des valeurs)
 output_vector = [0] * 4  # Vecteur de sortie de dimension 4
