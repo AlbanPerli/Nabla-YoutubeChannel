@@ -6,7 +6,7 @@ from layers.perceptron import Perceptron
 from layers.activationLayers import SigmoidLayer
 from layers.denseLayer import Dense
 from layers.layers import Module
-from loss.lossFunctions import MAE, MSE
+from loss.mse import MAE, MSE
 
 if __name__ == "__main__":
     p = Perceptron(3, use_bias=True, learning_rate=0.1)
