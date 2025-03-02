@@ -32,9 +32,9 @@ scores = [
 ]
 
 # Softmax
-from NeuralNetworks.layers.activationLayers import *
+from layers.activationLayers import *
 
-attention_weights = Softmax()(f=scores)
+attention_weights = Softmax()(scores)
 
 # Calcul du vecteur pondéré (somme pondérée des valeurs)
 output_vector = [0] * 4  # Vecteur de sortie de dimension 4
