@@ -1,10 +1,7 @@
 import math
-from lossFunctions import MSE
-from activationLayers import *
-from denseLayer import Dense
-from abstractLayer import Layer
-from activations import *
-from perceptron import Perceptron
+from .activationLayers import *
+from .abstractLayer import Layer
+from .perceptron import Perceptron
 
 class CNN1D(Layer):
     
@@ -74,18 +71,3 @@ class Module(Layer):
         for layer in reversed(self.layers):
             output_grad = layer(b=output_grad)
         return output_grad
-    
-module = Module( Dense(4, 8, lr=0.1),
-                     SigmoidLayer(8),
-                     Dense(8, 3, lr=0.1),
-    )
-
-loss = MSE()
-
-if __name__ == "__main__":
-    for i in range(100):
-        x = [0.4, -1.0, 0.5, 0.2]
-        y = module(x)
-        errors = loss(y, [0.2,0.7,0.1], grad=True)
-        out_grad = module(b=loss.grads)
-        print("Error: ", errors)

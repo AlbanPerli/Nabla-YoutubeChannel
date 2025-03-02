@@ -32,7 +32,7 @@ scores = [
 ]
 
 # Softmax
-from activationLayers import *
+from NeuralNetworks.layers.activationLayers import *
 
 attention_weights = Softmax()(f=scores)
 

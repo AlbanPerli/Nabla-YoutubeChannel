@@ -1,6 +1,6 @@
-from activationLayers import SigmoidLayer
-from denseLayer import Dense
-from layers import Module
+from layers.activationLayers import SigmoidLayer
+from layers.denseLayer import Dense
+from layers.layers import Module
 
 
 module = Module(Dense(5, 32, lr=0.1),
@@ -9,8 +9,6 @@ module = Module(Dense(5, 32, lr=0.1),
                 SigmoidLayer(32),
                 Dense(32, 5, lr=0.1),
                 SigmoidLayer(5))
-
-
 
 import numpy as np
 import random

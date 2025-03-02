@@ -1,6 +1,7 @@
 from graphviz import Digraph
-from denseLayer import Dense
-from layers import CNN1D, Module, Parallel
+
+from layers.denseLayer import Dense
+from NeuralNetworks.layers.layers import CNN1D, Module, Parallel
 from perceptron import Perceptron
 
 def visualize_module(module, input_size):

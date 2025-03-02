@@ -1,5 +1,5 @@
-from abstractLayer import Layer
-from perceptron import Perceptron
+from layers.abstractLayer import Layer
+from layers.perceptron import Perceptron
 
 class Dense(Layer):
     

@@ -1,6 +1,6 @@
 
-from abstractLayer import Layer
-from activations import *
+from .abstractLayer import Layer
+from activations.activations import *
 
 class Softmax(Layer):
     

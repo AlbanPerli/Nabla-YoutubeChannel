@@ -1,4 +1,4 @@
-from abstractLoss import LossFunction
+from loss.abstractLoss import LossFunction
 
 class MSE(LossFunction):
 

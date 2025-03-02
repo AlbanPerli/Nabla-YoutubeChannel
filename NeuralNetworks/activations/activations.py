@@ -1,4 +1,4 @@
-from abstractActivation import Activation
+from activations.abstractActivation import Activation
 import math
 
 class Linear(Activation):

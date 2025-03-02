@@ -1,8 +1,8 @@
 import math
-from activationLayers import Softmax
-from abstractLayer import Layer
-from denseLayer import Dense
-from perceptron import Perceptron
+from .activationLayers import Softmax
+from .abstractLayer import Layer
+from .denseLayer import Dense
+from .perceptron import Perceptron
 
 class AttentionLayer(Layer):
     
@@ -75,34 +75,4 @@ class AttentionLayer(Layer):
     
     def backward(self, output_grad):
         pass
-
-
-from test import *
-
-print(word_vectors_extended)
-seq = []
-words = []
-for k, v in word_vectors_extended.items():
-    seq.append(v)
-    words.append(k)
-    
-if __name__ == "__main__":
-    att = AttentionLayer(3)
-    #seq = [[0.7, 0.2, 0.9], [0.7, 0.1,0.2], [0.3, 0.7, 0.8]]
-    weighted_seq, attention_score = att.forward(sequence=seq)
-    print("Attention scores: ")
-    for a in attention_score:
-        print(a)
-    print("Weighted sequence: ")
-    for ws in weighted_seq:
-        print(ws)
-        
-    df_extended_word_vectors = pd.DataFrame.from_dict(word_vectors_extended, orient="index", columns=["Catégorie", "Genre", "Type", "Fréquence"])
-    print(df_extended_word_vectors)
-    # print a dataframe with words and their attention scores (confusion matrix)
-    df_attention_scores = pd.DataFrame(attention_score, index=words, columns=words)
-    print(df_attention_scores)
-    
-
- 
 
