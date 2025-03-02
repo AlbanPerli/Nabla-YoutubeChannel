@@ -1,6 +1,6 @@
 import random
 import math
-from lossFunctions import MSE
+from lossFunctions import MSE, MAE
 from abstractLayer import Layer
 from activations import *
 
@@ -51,14 +51,14 @@ class Perceptron(Layer):
 if __name__ == "__main__":
     p = Perceptron(3, use_bias=True, learning_rate=0.1)
     a = Sigmoid()
-    loss = MSE()
+    loss = MAE()
     
-    for i in range(100):
+    for i in range(1000):
         
         yLin = p([0.4, -1.0, 0.5])
         yNLin = a(yLin)
         
-        error = loss(yNLin, 0.8, grad=True)
+        error = loss(yNLin, 0.9, grad=True)
         d_loss = loss.grads[0]
         
         d = a(b=d_loss)

@@ -88,4 +88,4 @@ if __name__ == "__main__":
         y = module(x)
         errors = loss(y, [0.2,0.7,0.1], grad=True)
         out_grad = module(b=loss.grads)
-        
+        print("Error: ", errors)
