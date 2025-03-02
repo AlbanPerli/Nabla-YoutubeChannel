@@ -2,6 +2,8 @@ from abc import ABC, abstractmethod
 
 class LossFunction(ABC):
     
+    EPSILON = 1e-10
+    
     def __init__(self):
         self.grads = None
     

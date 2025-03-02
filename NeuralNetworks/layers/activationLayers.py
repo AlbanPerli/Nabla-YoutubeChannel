@@ -2,8 +2,11 @@
 from .abstractLayer import Layer
 from activations.activations import *
 
-class Softmax(Layer):
+class SoftmaxLayer(Layer):
     
+    # def __init__(self, n_inputs):
+    #     self.n_inputs = n_inputs
+        
     def forward(self, x):
         exps = [math.exp(i) for i in x]
         self.outputs = [i/sum(exps) for i in exps]

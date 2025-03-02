@@ -1,9 +1,11 @@
 import random
 import math
 
+from loss.binary_cross_entropy import BinaryCrossEntropy
+from loss.categorical_cross_entropy import CategoricalCrossEntropy
 from activations.activations import Sigmoid
 from layers.perceptron import Perceptron
-from layers.activationLayers import SigmoidLayer
+from layers.activationLayers import SigmoidLayer, SoftmaxLayer
 from layers.denseLayer import Dense
 from layers.layers import Module
 from loss.mae import MAE
@@ -34,13 +36,31 @@ if __name__ == "__main__":
     module = Module( Dense(4, 8, lr=0.1),
                      SigmoidLayer(8),
                      Dense(8, 3, lr=0.1),
+                     SoftmaxLayer()
     )
 
-    loss = MSE()
-    for i in range(100):
+    loss = CategoricalCrossEntropy()
+    for i in range(200):
         x = [0.4, -1.0, 0.5, 0.2]
         y = module(x)
-        errors = loss(y, [0.2,0.7,0.1], grad=True)
+        print("Output: ", y)
+        errors = loss(y, [1.0,0.0,0.0], grad=True)
         out_grad = module(b=loss.grads)
         print("Error: ", errors)
 
+
+
+    module = Module( Dense(4, 8, lr=0.1),
+                     SigmoidLayer(8),
+                     Dense(8, 1, lr=0.1),
+                     SigmoidLayer(1)
+    )
+
+    loss = BinaryCrossEntropy()
+    for i in range(1000):
+        x = [0.4, -1.0, 0.5, 0.2]
+        y = module(x)
+        print("Output: ", y)
+        errors = loss(y[0], 1.0, grad=True)
+        out_grad = module(b=loss.grads)
+        print("Error: ", errors)
